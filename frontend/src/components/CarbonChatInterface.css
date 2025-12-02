@@ -1,0 +1,1024 @@
+/* IBM Carbon Chat Interface - Simplified */
+
+.carbon-chat-interface {
+  height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cds-background);
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Add side gradients for left and right fade effect with professional blue glow - FIXED POSITION */
+.carbon-chat-interface::before,
+.carbon-chat-interface::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carbon-chat-interface::before { 
+  left: 0; 
+  background: linear-gradient(90deg, 
+    rgba(15, 98, 254, 0.08) 0%, 
+    rgba(15, 98, 254, 0.04) 50%, 
+    transparent 100%
+  );
+}
+
+.carbon-chat-interface::after { 
+  right: 0; 
+  background: linear-gradient(270deg, 
+    rgba(15, 98, 254, 0.08) 0%, 
+    rgba(15, 98, 254, 0.04) 50%, 
+    transparent 100%
+  );
+}
+
+/* Messages Container */
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center column like screenshot */
+  gap: 1.5rem; /* no change, but keeping for context */
+  scrollbar-width: thin;
+  scrollbar-color: var(--cds-border-subtle) transparent;
+  min-height: 0;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 80px; /* space for input */
+}
+
+/* Prevent browser from re-anchoring scroll causing jitter when new content appears */
+.messages-container * {
+  scroll-margin: 4px;
+}
+
+.scroll-anchor { height: 1px; }
+
+/* Reduce reflow impact when loading message appears */
+.loading-message { min-height: 72px; }
+
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: var(--cds-border-subtle);
+  border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--cds-border-strong);
+}
+
+/* Modal overrides for Clear Chat dialog */
+.clear-chat-modal .cds--modal-close {
+  color: var(--cds-text-primary);
+}
+
+.clear-chat-modal .cds--modal-close:hover,
+.clear-chat-modal .cds--modal-close:focus-visible {
+  background: var(--cds-layer-hover);
+  color: var(--cds-text-primary);
+}
+
+/* Message Container */
+.message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 960px; /* match input width */
+  align-self: center; /* ensure centered even if container alignment changes */
+}
+
+.user-message,
+.assistant-message {
+  align-self: center;
+}
+.user-message,
+.assistant-message { align-self: center; }
+
+/* Message Header */
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  padding: 0 0.25rem;
+}
+
+.message-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cds-text-on-color);
+  background-color: var(--cds-icon-primary);
+}
+
+.user-message .message-avatar {
+  background-color: var(--cds-support-info);
+  color: var(--cds-text-on-color);
+}
+
+.assistant-message .message-avatar {
+  background-color: var(--cds-support-success);
+  color: var(--cds-text-on-color);
+}
+
+.message-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.message-sender {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cds-text-primary);
+}
+
+.message-timestamp {
+  font-size: 0.625rem;
+  color: var(--cds-text-helper);
+}
+
+/* Message Content */
+.message-content {
+  padding: 1rem;
+  border-radius: 8px;
+  word-wrap: break-word;
+}
+
+/* Use a clean, document-like look (no chat bubbles) */
+.message-content {
+  background-color: transparent !important;
+  border: 0 !important;
+  padding: 0.25rem 0 0.5rem 0; /* light spacing */
+}
+
+.error-message {
+  border-color: var(--cds-support-error) !important;
+  background-color: var(--cds-notification-background-error) !important;
+}
+
+/* Inline loading spinner placeholder */
+.loading-inline-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align to the left */
+  padding: 0.5rem 0;
+  width: 100%;
+  max-width: 960px; /* Match message width */
+  padding-left: 44px; /* Align with message content */
+  box-sizing: border-box;
+}
+
+/* Ring spinner with transparent background */
+.ring-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid #0f62fe;
+  border-radius: 50%;
+  animation: ringSpin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes ringSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Assistant Response Styling */
+.assistant-response h1,
+.assistant-response h2,
+.assistant-response h3,
+.assistant-response h4,
+.assistant-response h5,
+.assistant-response h6 {
+  color: var(--cds-text-primary);
+  margin: 1rem 0 0.5rem 0;
+}
+
+.assistant-response h1 {
+  font-size: 2rem;
+  font-weight: 700; /* stronger like screenshot */
+  border-bottom: 1px solid var(--cds-border-subtle);
+  padding-bottom: 0.75rem;
+}
+
+.assistant-response h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.assistant-response h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.assistant-response p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: var(--cds-text-primary);
+}
+
+/* New wrapper for consistent alignment */
+.markdown-content > * {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.markdown-content .cds--snippet,
+.markdown-content .streaming-code-block {
+  max-width: none !important; /* Override any inline max-width */
+  width: 100% !important;
+}
+
+/* Horizontal rule style used after greeting heading */
+.assistant-response hr {
+  border: 0;
+  border-top: 1px solid var(--cds-border-subtle);
+  margin: 0.75rem 0 1rem;
+}
+
+/* Center the inline reaction row spacing (if present) */
+.assistant-response .reactions,
+.user-message .reactions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.inline-choice {
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+.assistant-response ul,
+.assistant-response ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.assistant-response li {
+  margin: 0.25rem 0;
+  line-height: 1.5;
+  color: var(--cds-text-primary);
+}
+
+.assistant-response blockquote {
+  border-left: 4px solid var(--cds-border-interactive);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  background-color: var(--cds-layer-accent);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.assistant-response table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.assistant-response th,
+.assistant-response td {
+  border: 1px solid var(--cds-border-subtle);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.assistant-response th {
+  background-color: var(--cds-layer-accent);
+  font-weight: 600;
+}
+
+.inline-code {
+  background-color: var(--cds-layer-accent);
+  color: var(--cds-text-primary);
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.875rem;
+}
+
+/* Code Snippets */
+.assistant-response .cds--snippet {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: #161616; /* black-like */
+  color: #f4f4f4;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  margin: 0.75rem 0;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+
+/* Remove custom container sizing so Show more/less works as designed */
+
+/* Ensure expand control is visible on dark background */
+.assistant-response .cds--snippet [class*="snippet-btn"][class*="expand"],
+.assistant-response .cds--snippet .cds--snippet-btn--expand,
+.assistant-response .cds--snippet .cds--snippet__expand {
+  color: #f4f4f4;
+}
+
+.assistant-response .cds--snippet pre,
+.assistant-response .cds--snippet code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #f4f4f4;
+}
+
+/* Copy button and actions inside snippet */
+/* Base: transparent background, visible icon on dark */
+.assistant-response .cds--snippet .cds--btn,
+.assistant-response .cds--snippet .cds--snippet__action,
+.assistant-response .cds--snippet .cds--copy {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #c6c6c6 !important;
+}
+
+/* Always white icons on dark snippet background (works in both light/dark themes) */
+.assistant-response .cds--snippet .cds--btn__icon,
+.assistant-response .cds--snippet .cds--snippet__action .cds--btn__icon,
+.assistant-response .cds--snippet .cds--copy .cds--btn__icon,
+.assistant-response .cds--snippet .cds--btn svg,
+.assistant-response .cds--snippet .cds--snippet__action svg,
+.assistant-response .cds--snippet .cds--copy svg,
+.assistant-response .cds--snippet .cds--btn svg path,
+.assistant-response .cds--snippet .cds--snippet__action svg path,
+.assistant-response .cds--snippet .cds--copy svg path,
+.assistant-response .cds--snippet .cds--snippet-btn svg {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* Hover/Focus: subtle highlight and clearer icon */
+.assistant-response .cds--snippet .cds--btn:hover,
+.assistant-response .cds--snippet .cds--snippet__action:hover,
+.assistant-response .cds--snippet .cds--copy:hover,
+.assistant-response .cds--snippet .cds--btn:focus,
+.assistant-response .cds--snippet .cds--snippet__action:focus,
+.assistant-response .cds--snippet .cds--copy:focus {
+  background: #262626 !important;
+  border-radius: 4px !important;
+  outline: 1px solid #393939 !important;
+  outline-offset: 0 !important;
+}
+
+.assistant-response .cds--snippet .cds--btn:hover .cds--btn__icon,
+.assistant-response .cds--snippet .cds--snippet__action:hover .cds--btn__icon,
+.assistant-response .cds--snippet .cds--copy:hover .cds--btn__icon {
+  fill: #ffffff !important;
+}
+
+/* Remove any light overlays some Carbon themes add */
+.assistant-response .cds--snippet-container::before,
+.assistant-response .cds--snippet-container::after { background: none !important; }
+
+.assistant-response .cds--snippet:focus-within {
+  outline: 1px solid #0f62fe;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px #0f62fe;
+}
+
+/* Make "Show more" button a visible white box */
+.assistant-response .cds--snippet .cds--snippet-btn--expand {
+  opacity: 1 !important;
+  background: #f4f4f4 !important; /* White background */
+  border-radius: 4px !important;
+  padding: 0.25rem 1rem !important;
+  height: auto !important;
+  min-height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  bottom: 0.5rem !important;
+  right: 0.5rem !important;
+  box-shadow: none !important;
+  transition: none !important; /* Prevent fade on re-render/focus change */
+  z-index: 2; /* Keep above code content gradient */
+}
+
+.assistant-response .cds--snippet .cds--snippet-btn--expand span,
+.assistant-response .cds--snippet .cds--snippet-btn--expand .cds--btn__icon + span {
+  color: #161616 !important; /* Black text */
+  font-weight: 500;
+  opacity: 1 !important; /* Always visible label */
+}
+
+.assistant-response .cds--snippet .cds--snippet-btn--expand .cds--btn__icon,
+.assistant-response .cds--snippet .cds--snippet-btn--expand svg,
+.assistant-response .cds--snippet .cds--snippet-btn--expand svg path {
+  fill: #0f62fe !important; /* IBM blue arrow */
+  stroke: #0f62fe !important;
+  display: inline-flex !important; /* Ensure icon always visible */
+  opacity: 1 !important; /* Prevent unintended fade */
+}
+
+/* Hover/Focus state for expand button - subtle contrast */
+.assistant-response .cds--snippet .cds--snippet-btn--expand:hover,
+.assistant-response .cds--snippet .cds--snippet-btn--expand:focus {
+  background: #e0e0e0 !important;
+  outline: 1px solid #8d8d8d !important;
+  outline-offset: 0 !important;
+}
+
+/* Ensure SVG inside expand button never hidden */
+.assistant-response .cds--snippet .cds--snippet-btn--expand svg {
+  visibility: visible !important;
+}
+
+/* Guard against Carbon applying reduced opacity while not hovered */
+.assistant-response .cds--snippet .cds--snippet-btn--expand[disabled],
+.assistant-response .cds--snippet .cds--snippet-btn--expand:disabled {
+  opacity: 1 !important;
+}
+
+/* Simple preformatted block for use during streaming to prevent glitches */
+.streaming-code-block {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: #161616;
+  color: #f4f4f4;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  margin: 0.75rem 0;
+  padding: 1rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+/* Source Files */
+.source-files {
+  margin-top: 1rem;
+  border-top: 1px solid var(--cds-border-subtle);
+  padding-top: 1rem;
+}
+
+.source-files-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.source-files-list .cds--tag {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Input Container */
+.input-container {
+  padding: 1.25rem 0 2rem;
+  margin: 0;
+  border-top: 1px solid var(--cds-border-subtle);
+  background: var(--cds-background);
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+}
+
+/* Professional blue glow gradient at the bottom - FIXED POSITION */
+.footer-gradient {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(15, 98, 254, 0.03) 40%,
+    rgba(15, 98, 254, 0.08) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Centered typing box wrapper */
+.typing-box {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+
+
+/* Watson-like input */
+.watson-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 12px;
+  box-shadow: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.watson-input input[type="text"] {
+  appearance: none;
+  border: 0;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  height: 44px;
+  padding: 0 88px 0 44px; /* space for icons */
+  font: 400 16px/1.3 "IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
+  color: var(--cds-text-primary);
+  -webkit-text-fill-color: var(--cds-text-primary); /* Fix for Safari/Webkit */
+}
+
+.watson-input input[type="text"]::placeholder {
+  color: var(--cds-text-placeholder);
+  opacity: 1;
+}
+
+/* Force good contrast in Gray 90 (dark) theme */
+[data-carbon-theme="g90"] .watson-input {
+  background: var(--cds-layer);
+  border-color: var(--cds-border-subtle);
+}
+[data-carbon-theme="g90"] .watson-input input[type="text"] {
+  color: var(--cds-text-primary);
+  -webkit-text-fill-color: var(--cds-text-primary);
+}
+[data-carbon-theme="g90"] .watson-input input[type="text"]::placeholder {
+  color: var(--cds-text-placeholder);
+}
+[data-carbon-theme="g90"] .icon-btn {
+  color: var(--cds-text-secondary);
+}
+[data-carbon-theme="g90"] .icon-btn:hover:not(:disabled) {
+  color: var(--cds-text-primary);
+}
+
+.watson-input.disabled input[type="text"] {
+  color: var(--cds-text-disabled);
+}
+
+/* Left placeholder icon (upload look) – decorative only */
+.watson-input::before {
+  content: "\2191"; /* up arrow to mimic upload-like glyph */
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cds-text-secondary);
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+/* Right-side icons */
+.icon-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cds-text-secondary);
+  cursor: pointer;
+}
+
+.icon-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.icon-btn.erase { right: 46px; }
+.icon-btn.send { right: 10px; }
+
+.erase-glyph { font-size: 16px; line-height: 1; }
+.stop-glyph { font-size: 14px; font-weight: 700; }
+
+.icon-btn:hover:not(:disabled) {
+  background: var(--cds-layer-hover);
+  color: var(--cds-text-primary);
+}
+
+/* Disable inner typing-box glow */
+.input-glow {
+  display: none !important;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: translateX(-50%) scaleX(0.9);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+.send-button {
+  height: 48px;
+  min-width: 48px;
+}
+
+.erase-button {
+  height: 48px;
+  min-width: 48px;
+  color: var(--cds-text-secondary);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.erase-button:hover:not(:disabled) {
+  color: var(--cds-text-primary);
+  background-color: var(--cds-layer-hover);
+}
+
+.button-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Prevent input from causing layout shifts */
+.input-container .cds--text-input {
+  transition: none;
+}
+
+.input-container .cds--text-input__field-wrapper {
+  min-height: 48px;
+}
+
+.input-container .cds--text-input__field-wrapper input {
+  transition: none;
+}
+
+/* Remove blue glow and use a dark outer border when active (clicking/typing) */
+.watson-input:focus-within,
+.watson-input:has(input:focus),
+.watson-input:has(input:focus-visible) {
+  outline: none !important;
+  border-color: var(--cds-border-strong) !important; /* darker border */
+  box-shadow: none !important; /* no inner shadow */
+}
+
+/* Keep the input itself from showing any default outline */
+.watson-input input:focus,
+.watson-input input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Streaming animation styles */
+.streaming .message-content {
+  position: relative;
+  border-color: #0f62fe;
+  box-shadow: 0 0 0 1px rgba(15, 98, 254, 0.3);
+  animation: streamingPulse 2s infinite ease-in-out;
+}
+
+.streaming-content {
+  border-color: #0f62fe;
+  box-shadow: 0 0 8px rgba(15, 98, 254, 0.2);
+}
+
+.typing-cursor {
+  display: inline-block;
+  animation: blink 1.2s infinite;
+  color: #0f62fe;
+  font-weight: bold;
+  margin-left: 3px;
+  font-size: 1em;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+@keyframes streamingPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 1px rgba(15, 98, 254, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.5), 0 0 12px rgba(15, 98, 254, 0.2);
+  }
+}
+
+/* Watson-like streaming message appearance */
+.streaming .assistant-response {
+  position: relative;
+}
+
+/* Remove scanning bar to match cleaner look */
+.streaming .assistant-response::after { display: none; }
+
+@keyframes scanLine {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 672px) {
+  .message-container {
+    max-width: 95%;
+  }
+  
+  .button-controls {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .message-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .message-avatar {
+    align-self: flex-start;
+  }
+  
+  .carbon-chat-interface {
+    height: calc(100vh - 24px);
+  }
+}
+
+/* Accessibility */
+.message-container:focus-within {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Animation */
+.message-container {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .message-content {
+    border-width: 2px;
+  }
+  
+  .message-avatar {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .message-container {
+    animation: none;
+  }
+  
+  .messages-container {
+    scroll-behavior: auto;
+  }
+}
+
+/* Clear chat modal styles to match reference */
+.clear-chat-modal .cds--modal-footer {
+  background-color: #2e2e2e; /* dark footer row */
+  border-top: 1px solid #525252;
+}
+.clear-chat-modal .cds--modal-close { color: #161616; }
+.clear-chat-modal .cds--modal-header__heading { font-weight: 600; }
+.clear-chat-modal .cds--btn--primary {
+  background-color: #0f62fe;
+}
+.clear-chat-modal .cds--btn--primary:hover {
+  background-color: #0353e9;
+}
+.clear-chat-modal .cds--btn--secondary {
+  background-color: #393939;
+  color: #ffffff;
+}
+.clear-chat-modal .cds--btn--secondary:hover {
+  background-color: #4c4c4c;
+}
+.clear-modal-body p { margin: 0 0 1rem; }
+.clear-modal-checkbox { margin-top: 0.5rem; }
+
+/* Execution Play Button and Message Tools Bar */
+.message-tools-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+  margin-bottom: 0.25rem;
+  margin-left: auto; /* push to the right */
+}
+
+.tools-icon-btn {
+  background: #262626;
+  border: 1px solid #393939;
+  color: #f4f4f4;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tools-icon-btn:hover {
+  background: #393939;
+}
+
+.tools-icon-btn:focus-visible {
+  outline: 2px solid #0f62fe;
+  outline-offset: 2px;
+}
+
+/* Welcome Screen Styles */
+.welcome-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 4rem;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.welcome-header {
+  margin-bottom: 3rem;
+}
+
+.welcome-icon {
+  margin-bottom: 1rem;
+  color: var(--cds-icon-primary);
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--cds-text-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+}
+
+.welcome-subtitle {
+  font-size: 1rem;
+  color: var(--cds-text-secondary);
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.welcome-illustration {
+  margin-bottom: 3rem;
+}
+
+.watson-illustration {
+  width: 300px;
+  height: 150px;
+  opacity: 0.8;
+}
+
+.sample-questions {
+  width: 100%;
+  max-width: 800px;
+}
+
+.sample-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--cds-text-primary);
+  margin: 0 0 1.5rem 0;
+  text-align: left;
+}
+
+.question-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Ensure GitHub preview modal has a high base z-index but remains under Execution Console (which portals to body) */
+.github-preview-modal .cds--modal-container {
+  z-index: 10000;
+}
+
+/* Inline section heading row with per-section play button */
+.section-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-heading-row h3,
+.section-heading-row h4,
+.section-heading-row h5,
+.section-heading-row p {
+  margin-right: auto;
+}
+.section-play-btn {
+  width: 24px;
+  height: 24px;
+}
+
+.sample-question-btn {
+  background: transparent;
+  border: 1px solid var(--cds-border-subtle-01);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--cds-text-primary);
+  min-height: 64px;
+}
+
+.sample-question-btn:hover {
+  background: var(--cds-layer-hover);
+  border-color: var(--cds-border-subtle);
+}
+
+.sample-question-btn:hover .question-arrow {
+  color: var(--cds-icon-interactive);
+  transform: translateX(4px);
+}
+
+.question-arrow {
+  color: var(--cds-icon-secondary);
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.sample-question-btn span {
+  flex: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-screen {
+    padding: 1rem;
+  }
+  
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+  
+  .watson-illustration {
+    width: 250px;
+    height: 125px;
+  }
+  
+  .question-grid {
+    grid-template-columns: 1fr;
+  }
+}

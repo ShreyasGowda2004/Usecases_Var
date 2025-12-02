@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Cases Tree Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@carbon/icons/lib/index.css">
+    <style>
+        :root {
+            --cds-background: #161616;
+            --cds-ui-background: #262626;
+            --cds-ui-01: #393939;
+            --cds-ui-02: #525252;
+            --cds-ui-03: #6f6f6f;
+            --cds-ui-04: #8d8d8d;
+            --cds-ui-05: #a8a8a8;
+            --cds-text-01: #f4f4f4;
+            --cds-text-02: #c6c6c6;
+            --cds-text-03: #8d8d8d;
+            --cds-text-04: #6f6f6f;
+            --cds-interactive-01: #0f62fe;
+            --cds-interactive-02: #393939;
+            --cds-interactive-03: #0f62fe;
+            --cds-interactive-04: #0f62fe;
+            --cds-danger: #da1e28;
+            --cds-warning: #f1c21b;
+            --cds-success: #24a148;
+            --cds-focus: #0f62fe;
+            --cds-hover-ui: #4c4c4c;
+            --cds-active-ui: #6f6f6f;
+            --cds-field-01: #262626;
+            --cds-field-02: #393939;
+            --cds-border-subtle: #525252;
+            --cds-border-strong: #8d8d8d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--cds-background);
+            color: var(--cds-text-01);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--cds-ui-background);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            border: 1px solid var(--cds-border-subtle);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--cds-text-01);
+        }
+
+        .header p {
+            color: var(--cds-text-02);
+            font-size: 1rem;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .btn {
+            background: var(--cds-interactive-01);
+            color: var(--cds-text-01);
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: #0353e9;
+        }
+
+        .btn:active {
+            background: #002d9c;
+        }
+
+        .btn.secondary {
+            background: var(--cds-interactive-02);
+            border: 1px solid var(--cds-border-subtle);
+        }
+
+        .btn.secondary:hover {
+            background: var(--cds-hover-ui);
+        }
+
+        .btn.danger {
+            background: var(--cds-danger);
+        }
+
+        .btn.danger:hover {
+            background: #ba1b23;
+        }
+
+        .btn.small {
+            padding: 0.375rem 0.75rem;
+            font-size: 12px;
+        }
+
+        .tree-container {
+            background: var(--cds-ui-background);
+            border-radius: 4px;
+            border: 1px solid var(--cds-border-subtle);
+            padding: 1.5rem;
+        }
+
+        .tree {
+            list-style: none;
+        }
+
+        .tree-item {
+            margin: 0;
+            position: relative;
+        }
+
+        .tree-item-content {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tree-item-content:hover {
+            background: var(--cds-hover-ui);
+        }
+
+        .tree-item.selected > .tree-item-content {
+            background: var(--cds-interactive-01);
+            color: var(--cds-text-01);
+        }
+
+        .tree-toggle {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            color: var(--cds-text-02);
+            font-size: 12px;
+        }
+
+        .tree-toggle:hover {
+            color: var(--cds-text-01);
+        }
+
+        .tree-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+            color: var(--cds-text-01);
+            background: var(--cds-interactive-01);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            min-width: 20px;
+            flex-shrink: 0;
+        }
+
+        .tree-icon.category {
+            background: var(--cds-interactive-01);
+        }
+
+        .tree-icon.guide {
+            background: var(--cds-success);
+        }
+
+        .tree-icon.endpoint {
+            background: var(--cds-warning);
+            color: var(--cds-background);
+        }
+
+        .tree-label {
+            flex: 1;
+            font-weight: 500;
+            color: var(--cds-text-01);
+        }
+
+        .tree-actions {
+            display: flex;
+            gap: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        .tree-item-content:hover .tree-actions {
+            opacity: 1;
+        }
+
+        .tree-item.selected .tree-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cds-text-03);
+            transition: all 0.15s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--cds-hover-ui);
+            color: var(--cds-text-01);
+        }
+
+        .action-btn.add:hover {
+            color: var(--cds-success);
+        }
+
+        .action-btn.edit:hover {
+            color: var(--cds-warning);
+        }
+
+        .action-btn.delete:hover {
+            color: var(--cds-danger);
+        }
+
+        .tree-children {
+            margin-left: 1.5rem;
+            border-left: 1px solid var(--cds-border-subtle);
+            padding-left: 1rem;
+            display: none;
+        }
+
+        .tree-item.expanded > .tree-children {
+            display: block;
+        }
+
+        .tree-item.expanded > .tree-item-content .tree-toggle::before {
+            content: "▼";
+        }
+
+        .tree-item.collapsed > .tree-item-content .tree-toggle::before {
+            content: "▶";
+        }
+
+        .tree-item.leaf > .tree-item-content .tree-toggle {
+            visibility: hidden;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--cds-ui-background);
+            border: 1px solid var(--cds-border-subtle);
+            border-radius: 4px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--cds-text-01);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--cds-text-02);
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--cds-hover-ui);
+            color: var(--cds-text-01);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--cds-text-01);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--cds-field-01);
+            border: 1px solid var(--cds-border-subtle);
+            border-radius: 4px;
+            color: var(--cds-text-01);
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.15s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--cds-focus);
+            box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.2);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--cds-field-01);
+            border: 1px solid var(--cds-border-subtle);
+            border-radius: 4px;
+            color: var(--cds-text-01);
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--cds-field-01);
+            border: 1px solid var(--cds-border-subtle);
+            border-radius: 4px;
+            color: var(--cds-text-01);
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.15s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--cds-focus);
+            box-shadow: 0 0 0 2px rgba(15, 98, 254, 0.2);
+        }
+
+        .tree-item.hidden {
+            display: none;
+        }
+
+        .tree-item.highlighted .tree-label {
+            background: var(--cds-warning);
+            color: var(--cds-background);
+            padding: 0.125rem 0.25rem;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+
+        .tree-item.search-focused {
+            outline: 2px solid var(--cds-focus);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Icons - Remove emoji-based icons */
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+        }
+
+        .icon-add::before {
+            content: "➕";
+        }
+
+        .icon-edit::before {
+            content: "✏️";
+        }
+
+        .icon-delete::before {
+            content: "🗑️";
+        }
+
+        .icon-expand::before {
+            content: "⬇";
+        }
+
+        .icon-collapse::before {
+            content: "⬆";
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+        }
+
+        /* Animation for tree items */
+        .tree-item {
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            color: var(--cds-text-03);
+            font-size: 12px;
+        }
+
+        /* Remove stats section - no longer used */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Use Cases Tree Manager</h1>
+            <p>Professional collapsible tree structure for managing use cases with full CRUD operations.</p>
+        </div>
+
+        <div class="toolbar">
+            <button class="btn" onclick="addRootNode()">
+                <span class="icon icon-add"></span>
+                Add Main Category
+            </button>
+            <button class="btn secondary" onclick="expandAll()">
+                <span class="icon icon-expand"></span>
+                Expand All
+            </button>
+            <button class="btn secondary" onclick="collapseAll()">
+                <span class="icon icon-collapse"></span>
+                Collapse All
+            </button>
+            <button class="btn secondary" onclick="resetTree()">
+                Reset Tree
+            </button>
+            <button class="btn secondary" onclick="exportData()">
+                Export JSON
+            </button>
+            <button class="btn secondary" onclick="importData()">
+                Import JSON
+            </button>
+            <input type="file" id="import-file" accept=".json" style="display: none;" onchange="handleFileImport(event)">
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search use cases..." oninput="searchTree(this.value)" onkeydown="handleSearchKeydown(event)">
+            </div>
+        </div>
+
+        <div class="tree-container">
+            <ul id="api-tree" class="tree"></ul>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="node-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Add Node</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="node-form">
+                <div class="form-group">
+                    <label class="form-label" for="node-name">Name *</label>
+                    <input type="text" id="node-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="node-type">Type</label>
+                    <select id="node-type" class="form-select">
+                        <option value="category">Main Category</option>
+                        <option value="guide">Sub Category</option>
+                        <option value="endpoint">Use Case</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="node-description">Description</label>
+                    <input type="text" id="node-description" class="form-input" placeholder="Optional description">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn" id="modal-save-btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Tree data structure
+        let treeData = {
+            nodes: {},
+            nextId: 1,
+            rootIds: [],
+            counters: {
+                category: 0,
+                guide: 0,
+                endpoint: 0
+            }
+        };
+
+        // Current modal state
+        let modalState = {
+            mode: 'add', // 'add' or 'edit'
+            parentId: null,
+            nodeId: null
+        };
+
+        // Search state
+        let searchResults = [];
+        let currentSearchIndex = 0;
+
+        // Initialize with sample data
+        function initializeTree() {
+            // Reset counters
+            treeData.counters = { category: 0, guide: 0, endpoint: 0 };
+            
+            const sampleData = {
+                "Sets": {
+                    "Company Set": [
+                        "Create Company Set",
+                        "Query Company Set (Without Filter)",
+                        "Query Company Set (With Filter)",
+                        "Update Company Set"
+                    ],
+                    "Item Set": [
+                        "Create Item Set",
+                        "Query Item Set (Without Filter)",
+                        "Query Item Set (With Filter)",
+                        "Update Item Set"
+                    ]
+                },
+                "Chart of Accounts (COA)": {
+                    "GL Components API Guide": [
+                        "Create GL Components",
+                        "Query GL Components (Without Filter)",
+                        "Query GL Components (With Filter)",
+                        "Update GL Components"
+                    ],
+                    "Chart Of Accounts (COA) API Guide": [
+                        "Create COA",
+                        "Query COA (Without Filter)",
+                        "Query COA (With Filter)",
+                        "Update COA"
+                    ]
+                },
+                "Item": {
+                    "Item API Guide": [
+                        "Create Item",
+                        "Query Item (Without Filter)",
+                        "Query Item (With Filter)",
+                        "Update Item"
+                    ],
+                    "Service Item API Guide": [
+                        "Create Service Item",
+                        "Query Service Item (Without Filter)",
+                        "Query Service Item (With Filter)",
+                        "Update Service Item"
+                    ]
+                },
+                "Location": {
+                    "Locations API Guide": [
+                        "Create Location",
+                        "Query Location (Without Filter)",
+                        "Query Location (With Filter)",
+                        "Update Location"
+                    ]
+                },
+                "Assets": {
+                    "Assets API Guide": [
+                        "Create Assets",
+                        "Query Assets (Without Filter)",
+                        "Query Assets (With Filter)",
+                        "Update Assets"
+                    ]
+                },
+                "Company": {
+                    "Company Master API Guide": [
+                        "Create Company Master",
+                        "Query Company Master (Without Filter)",
+                        "Query Company Master (With Filter)",
+                        "Update Company Master"
+                    ]
+                }
+            };
+
+            // Convert sample data to tree structure
+            Object.entries(sampleData).forEach(([rootName, categories]) => {
+                const rootId = createNode(rootName, null, 'category');
+                
+                Object.entries(categories).forEach(([categoryName, endpoints]) => {
+                    const categoryId = createNode(categoryName, rootId, 'guide');
+                    
+                    endpoints.forEach(endpoint => {
+                        createNode(endpoint, categoryId, 'endpoint');
+                    });
+                });
+            });
+
+            renderTree();
+            updateStats();
+            // Recalculate numbers after initialization
+            recalculateNumbers();
+        }
+
+        // Create a new node
+        function createNode(name, parentId, type = 'category', description = '') {
+            const id = treeData.nextId++;
+            
+            treeData.nodes[id] = {
+                id,
+                name,
+                type,
+                description,
+                parentId,
+                children: [],
+                expanded: false,
+                number: 1 // Will be recalculated
+            };
+
+            if (parentId) {
+                treeData.nodes[parentId].children.push(id);
+            } else {
+                treeData.rootIds.push(id);
+            }
+
+            return id;
+        }
+
+        // Delete a node and all its children
+        function deleteNode(nodeId) {
+            const node = treeData.nodes[nodeId];
+            if (!node) return;
+
+            // Remove from parent's children array
+            if (node.parentId) {
+                const parent = treeData.nodes[node.parentId];
+                parent.children = parent.children.filter(id => id !== nodeId);
+            } else {
+                treeData.rootIds = treeData.rootIds.filter(id => id !== nodeId);
+            }
+
+            // Recursively delete children
+            node.children.forEach(childId => deleteNode(childId));
+
+            // Delete the node itself
+            delete treeData.nodes[nodeId];
+
+            // Recalculate numbers for all nodes
+            recalculateNumbers();
+        }
+
+        // Recalculate numbers for all nodes after deletion or creation
+        function recalculateNumbers() {
+            // First, number all root nodes sequentially (1, 2, 3, ...)
+            treeData.rootIds.forEach((rootId, index) => {
+                const rootNode = treeData.nodes[rootId];
+                if (rootNode) {
+                    rootNode.number = index + 1;
+                    
+                    // For each root node, number its children starting from 1
+                    numberChildrenRecursively(rootId);
+                }
+            });
+        }
+
+        // Recursively number children within each parent, starting from 1
+        function numberChildrenRecursively(parentId) {
+            const parentNode = treeData.nodes[parentId];
+            if (!parentNode || !parentNode.children.length) return;
+            
+            // Simply number all children in order, starting from 1
+            parentNode.children.forEach((childId, index) => {
+                const child = treeData.nodes[childId];
+                if (child) {
+                    child.number = index + 1;
+                    
+                    // Recursively number this child's children (also starting from 1)
+                    numberChildrenRecursively(child.id);
+                }
+            });
+        }
+
+        // Update a node
+        function updateNode(nodeId, name, type, description) {
+            const node = treeData.nodes[nodeId];
+            if (node) {
+                node.name = name;
+                node.type = type;
+                node.description = description;
+            }
+        }
+
+        // Render the entire tree
+        function renderTree() {
+            const treeContainer = document.getElementById('api-tree');
+            treeContainer.innerHTML = '';
+            
+            // Recalculate numbers before rendering
+            recalculateNumbers();
+            
+            treeData.rootIds.forEach(rootId => {
+                const rootElement = renderNode(rootId);
+                treeContainer.appendChild(rootElement);
+            });
+        }
+
+        // Render a single node
+        function renderNode(nodeId) {
+            const node = treeData.nodes[nodeId];
+            if (!node) return document.createElement('div');
+
+            const li = document.createElement('li');
+            li.className = `tree-item ${node.children.length === 0 ? 'leaf' : (node.expanded ? 'expanded' : 'collapsed')}`;
+            li.setAttribute('data-node-id', nodeId);
+
+            const content = document.createElement('div');
+            content.className = 'tree-item-content';
+            content.onclick = (e) => {
+                e.stopPropagation();
+                toggleNode(nodeId);
+            };
+
+            // Toggle button
+            const toggle = document.createElement('div');
+            toggle.className = 'tree-toggle';
+            toggle.onclick = (e) => {
+                e.stopPropagation();
+                toggleNode(nodeId);
+            };
+
+            // Icon with number
+            const icon = document.createElement('div');
+            icon.className = `tree-icon ${node.type}`;
+            icon.textContent = node.number || '0';
+            icon.title = `${node.type.charAt(0).toUpperCase() + node.type.slice(1)} #${node.number || 0}`;
+
+            // Label
+            const label = document.createElement('div');
+            label.className = 'tree-label';
+            label.textContent = node.name;
+            if (node.description) {
+                label.title = node.description;
+            }
+
+            // Actions
+            const actions = document.createElement('div');
+            actions.className = 'tree-actions';
+
+            const addBtn = document.createElement('button');
+            addBtn.className = 'action-btn add';
+            addBtn.innerHTML = '<span class="icon icon-add"></span>';
+            addBtn.title = 'Add child';
+            addBtn.onclick = (e) => {
+                e.stopPropagation();
+                openModal('add', nodeId);
+            };
+
+            const editBtn = document.createElement('button');
+            editBtn.className = 'action-btn edit';
+            editBtn.innerHTML = '<span class="icon icon-edit"></span>';
+            editBtn.title = 'Edit';
+            editBtn.onclick = (e) => {
+                e.stopPropagation();
+                openModal('edit', null, nodeId);
+            };
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'action-btn delete';
+            deleteBtn.innerHTML = '<span class="icon icon-delete"></span>';
+            deleteBtn.title = 'Delete';
+            deleteBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (confirm(`Are you sure you want to delete "${node.name}" and all its children?`)) {
+                    deleteNode(nodeId);
+                    renderTree();
+                    updateStats();
+                }
+            };
+
+            actions.appendChild(addBtn);
+            actions.appendChild(editBtn);
+            actions.appendChild(deleteBtn);
+
+            content.appendChild(toggle);
+            content.appendChild(icon);
+            content.appendChild(label);
+            content.appendChild(actions);
+
+            li.appendChild(content);
+
+            // Children
+            if (node.children.length > 0) {
+                const childrenContainer = document.createElement('ul');
+                childrenContainer.className = 'tree-children';
+                
+                node.children.forEach(childId => {
+                    const childElement = renderNode(childId);
+                    childrenContainer.appendChild(childElement);
+                });
+
+                li.appendChild(childrenContainer);
+            }
+
+            return li;
+        }
+
+        // Get icon class based on node type
+        function getNodeIcon(type) {
+            switch (type) {
+                case 'category': return 'icon-folder';
+                case 'guide': return 'icon-folder';
+                case 'endpoint': return 'icon-file';
+                default: return 'icon-file';
+            }
+        }
+
+        // Toggle node expansion
+        function toggleNode(nodeId) {
+            const node = treeData.nodes[nodeId];
+            if (node && node.children.length > 0) {
+                node.expanded = !node.expanded;
+                const element = document.querySelector(`[data-node-id="${nodeId}"]`);
+                if (element) {
+                    element.className = `tree-item ${node.expanded ? 'expanded' : 'collapsed'}`;
+                }
+            }
+        }
+
+        // Expand all nodes
+        function expandAll() {
+            Object.values(treeData.nodes).forEach(node => {
+                if (node.children.length > 0) {
+                    node.expanded = true;
+                }
+            });
+            renderTree();
+        }
+
+        // Collapse all nodes
+        function collapseAll() {
+            Object.values(treeData.nodes).forEach(node => {
+                node.expanded = false;
+            });
+            renderTree();
+        }
+
+        // Open modal for adding/editing
+        function openModal(mode, parentId = null, nodeId = null) {
+            modalState = { mode, parentId, nodeId };
+            
+            const modal = document.getElementById('node-modal');
+            const title = document.getElementById('modal-title');
+            const form = document.getElementById('node-form');
+            const saveBtn = document.getElementById('modal-save-btn');
+            const typeSelect = document.getElementById('node-type');
+
+            if (mode === 'add') {
+                title.textContent = parentId ? 'Add Child Node' : 'Add Main Category';
+                saveBtn.textContent = 'Add';
+                form.reset();
+                
+                // If adding to root, only allow main category
+                if (!parentId) {
+                    typeSelect.value = 'category';
+                    typeSelect.disabled = true;
+                } else {
+                    typeSelect.disabled = false;
+                }
+            } else {
+                const node = treeData.nodes[nodeId];
+                title.textContent = 'Edit Node';
+                saveBtn.textContent = 'Update';
+                document.getElementById('node-name').value = node.name;
+                document.getElementById('node-type').value = node.type;
+                document.getElementById('node-description').value = node.description || '';
+                typeSelect.disabled = false;
+            }
+
+            modal.classList.add('active');
+            document.getElementById('node-name').focus();
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('node-modal').classList.remove('active');
+        }
+
+        // Add root node
+        function addRootNode() {
+            openModal('add');
+        }
+
+        // Handle search keydown (Enter key)
+        function handleSearchKeydown(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const query = event.target.value.trim();
+                if (query) {
+                    searchTree(query);
+                    navigateToNextResult();
+                }
+            }
+        }
+
+        // Navigate to next search result
+        function navigateToNextResult() {
+            if (searchResults.length === 0) return;
+
+            // Clear previous focus
+            document.querySelectorAll('.tree-item.search-focused').forEach(item => {
+                item.classList.remove('search-focused');
+            });
+
+            // Move to next result
+            currentSearchIndex = (currentSearchIndex + 1) % searchResults.length;
+            const nodeId = searchResults[currentSearchIndex];
+            const element = document.querySelector(`[data-node-id="${nodeId}"]`);
+            
+            if (element) {
+                element.classList.add('search-focused');
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Expand parents to make sure item is visible
+                expandParentsToNode(nodeId);
+            }
+        }
+
+        // Expand all parents of a node to make it visible
+        function expandParentsToNode(nodeId) {
+            const node = treeData.nodes[nodeId];
+            if (!node) return;
+            
+            let current = node;
+            while (current && current.parentId) {
+                const parent = treeData.nodes[current.parentId];
+                if (parent) {
+                    parent.expanded = true;
+                    current = parent;
+                }
+            }
+            
+            // Re-render to show expanded state
+            renderTree();
+        }
+
+        // Handle form submission
+        document.getElementById('node-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('node-name').value.trim();
+            const type = document.getElementById('node-type').value;
+            const description = document.getElementById('node-description').value.trim();
+
+            if (!name) return;
+
+            if (modalState.mode === 'add') {
+                createNode(name, modalState.parentId, type, description);
+            } else {
+                updateNode(modalState.nodeId, name, type, description);
+            }
+
+            closeModal();
+            renderTree();
+            recalculateNumbers();
+            updateStats();
+        });
+
+        // Search functionality
+        function searchTree(query) {
+            const items = document.querySelectorAll('.tree-item');
+            
+            // Clear previous search state
+            searchResults = [];
+            currentSearchIndex = -1;
+            items.forEach(item => {
+                item.classList.remove('hidden', 'highlighted', 'search-focused');
+            });
+            
+            if (!query.trim()) {
+                return;
+            }
+
+            const searchTerm = query.toLowerCase();
+            let hasVisibleChildren = {};
+            let matchingNodes = [];
+
+            // First pass: find matching items
+            items.forEach(item => {
+                const label = item.querySelector('.tree-label').textContent.toLowerCase();
+                const nodeId = item.getAttribute('data-node-id');
+                
+                if (label.includes(searchTerm)) {
+                    item.classList.add('highlighted');
+                    matchingNodes.push(nodeId);
+                    searchResults.push(nodeId);
+                    
+                    // Mark all parents as having visible children
+                    let current = treeData.nodes[nodeId];
+                    while (current && current.parentId) {
+                        hasVisibleChildren[current.parentId] = true;
+                        current = treeData.nodes[current.parentId];
+                    }
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            // Second pass: show parents with visible children
+            items.forEach(item => {
+                const nodeId = item.getAttribute('data-node-id');
+                if (hasVisibleChildren[nodeId]) {
+                    item.classList.remove('hidden');
+                }
+            });
+
+            // Expand nodes that have matches or contain matches
+            Object.keys(hasVisibleChildren).forEach(nodeId => {
+                const node = treeData.nodes[nodeId];
+                if (node) {
+                    node.expanded = true;
+                }
+            });
+
+            // Auto-expand matching nodes if they have children
+            matchingNodes.forEach(nodeId => {
+                const node = treeData.nodes[nodeId];
+                if (node && node.children.length > 0) {
+                    node.expanded = true;
+                }
+            });
+
+            renderTree();
+
+            // If we have results, focus on the first one
+            if (searchResults.length > 0) {
+                currentSearchIndex = 0;
+                const firstNodeId = searchResults[0];
+                const firstElement = document.querySelector(`[data-node-id="${firstNodeId}"]`);
+                if (firstElement) {
+                    firstElement.classList.add('search-focused');
+                    firstElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
+        // Export data
+        function exportData() {
+            const dataStr = JSON.stringify(treeData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'api-tree-data.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Import data
+        function importData() {
+            document.getElementById('import-file').click();
+        }
+
+        // Handle file import
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (confirm('This will replace all current data. Are you sure?')) {
+                        treeData = importedData;
+                        renderTree();
+                        recalculateNumbers();
+                        updateStats();
+                    }
+                } catch (error) {
+                    alert('Invalid JSON file');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Update statistics (removed display, but keep for potential future use)
+        function updateStats() {
+            // Statistics removed from UI but function kept for compatibility
+        }
+
+        // Reset tree to initial state
+        function resetTree() {
+            if (confirm('This will reset the tree to the original structure. Are you sure?')) {
+                // Clear current data
+                treeData = {
+                    nodes: {},
+                    nextId: 1,
+                    rootIds: [],
+                    counters: {
+                        category: 0,
+                        guide: 0,
+                        endpoint: 0
+                    }
+                };
+                
+                // Reinitialize with sample data
+                initializeTree();
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('node-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initialize the tree on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTree();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+.exec-details-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.exec-kv-list {
+	list-style: none;
+	padding-left: 0;
+	margin: 6px 0 0 0;
+}
+
+.exec-kv-list li {
+	padding: 2px 0;
+	border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+
+.exec-code {
+	max-height: 320px;
+	overflow: auto;
+}
+
+.exec-section-title {
+	margin: 8px 0 4px 0;
+	font-weight: 600;
+}
+
+.exec-tabs .cds--tabs__nav {
+	margin-bottom: 8px;
+}
+
+.exec-details-body {
+	max-height: 70vh;
+	overflow-y: auto;
+	padding-right: 0.5rem;
+}
+
+.exec-tabs .cds--tab-content {
+	padding-top: 0.5rem;
+}
+
+.exec-panel-scroll {
+	max-height: 60vh;
+	overflow-y: auto;
+	padding-right: 0.5rem;
+}
+
+.exec-code pre {
+	white-space: pre-wrap;
+	word-break: break-word;
+}

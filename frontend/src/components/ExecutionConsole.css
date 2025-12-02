@@ -1,0 +1,199 @@
+.execution-console-overlay { position: fixed; inset: 0; z-index: 12000; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+/* Backdrop placed behind console. If blur causes perceived fuzziness, you can remove backdrop-filter line. */
+.execution-console-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(2px); z-index: 0; }
+/* Elevate console above backdrop so it is crisp, not blurred */
+.execution-console { position: relative; z-index: 1; width: min(1200px, 96vw); height: 82vh; background: #161616; color: #f4f4f4; border: 1px solid #393939; border-radius: 6px; padding: 0; display: flex; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,0.5); user-select: text; -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; }
+.execution-console .cds--label,
+.execution-console label,
+.execution-console .cds--form-item .cds--label,
+.execution-console .cds--form-item label {
+	color: #f4f4f4 !important;
+	font-weight: 500;
+}
+/* Force Carbon inputs in dark panel to use light text */
+.execution-console input, .execution-console textarea, .execution-console select { color:#f4f4f4; user-select: text; -webkit-user-select: text; }
+.execution-console .cds--select-input, .execution-console .cds--text-input { background:#1f1f1f; }
+/* Ensure Carbon TextInput internals render correctly on dark backgrounds */
+.execution-console .cds--text-input .cds--text-input__field-outer,
+.execution-console .cds--text-area .cds--text-area__wrapper,
+.execution-console .cds--text-input input.cds--text-input__field,
+.execution-console .cds--text-input input,
+.execution-console .cds--text-area textarea {
+	background:#1f1f1f !important;
+	color:#f4f4f4 !important;
+	-webkit-text-fill-color:#f4f4f4; /* Safari */
+	border-color:#525252 !important;
+}
+/* Fix white background on key/value TextInput rows */
+.execution-console .kv-input,
+.execution-console .kv-input .cds--text-input,
+.execution-console .kv-input input {
+	background:#1f1f1f !important;
+	color:#f4f4f4 !important;
+}
+/* Make sure the dropdown caret is visible on dark background */
+.execution-console .cds--select__arrow { color:#f4f4f4 !important; fill:#f4f4f4 !important; }
+.execution-console .cds--select__arrow svg { fill:#f4f4f4 !important; }
+.execution-console .cds--select__arrow path { fill:#f4f4f4 !important; }
+/* Ensure all interactive text elements show high-contrast text even when not focused */
+.execution-console .cds--text-input,
+.execution-console .cds--text-input input,
+.execution-console .cds--select-input,
+.execution-console select.cds--select-input,
+.execution-console .kv-input input,
+.execution-console .url-input input,
+.execution-console .raw-body-textarea textarea {
+	background:#1f1f1f !important;
+	color:#f4f4f4 !important;
+	-webkit-text-fill-color:#f4f4f4; /* Safari */
+	border-color:#525252 !important;
+}
+.execution-console .cds--text-input:disabled,
+.execution-console .cds--text-input input:disabled,
+.execution-console select.cds--select-input:disabled {
+	background:#262626 !important;
+	color:#8d8d8d !important;
+	-webkit-text-fill-color:#8d8d8d;
+}
+/* Placeholder visibility */
+.execution-console ::placeholder { color:#8d8d8d; opacity:1; }
+/* Some browsers apply placeholder color via vendor selectors */
+.execution-console ::-webkit-input-placeholder { color:#8d8d8d; }
+.execution-console :-ms-input-placeholder { color:#8d8d8d; }
+.execution-console ::-ms-input-placeholder { color:#8d8d8d; }
+/* Dropdown options */
+.execution-console select.cds--select-input option { background:#161616; color:#f4f4f4; }
+/* Utility: add class no-blur on overlay to remove any background blur quickly */
+.execution-console-overlay.no-blur .execution-console-backdrop { backdrop-filter: none; }
+.exec-header { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid #262626; background:#1f1f1f; }
+.exec-title { font-weight: 600; display:flex; align-items:center; }
+.exec-close-btn { background: none; border: none; color: #f4f4f4; cursor: pointer; padding: 4px; border-radius:4px; }
+.exec-close-btn:hover { background:#262626; }
+.exec-section { padding: 0.75rem 1rem 1rem; overflow: auto; }
+.request-builder { border-bottom: 1px solid #262626; }
+.instance-select-row { display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; }
+.instance-select-row .cds--select-input { background:#1f1f1f !important; color:#f4f4f4 !important; border-color:#525252 !important; }
+.instance-select { flex:1; }
+.instance-summary { display:flex; align-items:center; gap:0.5rem; color:#c6c6c6; font-size:0.75rem; }
+.request-top-row { display:grid; grid-template-columns: 120px 1fr 120px; gap:0.75rem; margin-bottom:1rem; align-items:center; }
+.method-display { display:flex; flex-direction:column; gap:0.3rem; padding:0.15rem 0; }
+.method-label { font-size:0.65rem; letter-spacing:0.4px; text-transform:uppercase; color:#c6c6c6; }
+.method-display .cds--tag { font-size:0.75rem; }
+.method-tag-display { 
+  font-size: 0.875rem !important; 
+  font-weight: 600 !important;
+  padding: 0.25rem 0.75rem !important;
+  min-width: 80px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.url-input input { background:#1f1f1f; color:#ffffff; border-color:#525252; }
+.row-groups { display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem; }
+.table-section { background:#1f1f1f; border:1px solid #262626; border-radius:4px; padding:0.5rem 0.5rem 0.25rem; display:flex; flex-direction:column; }
+.table-section h5 { color:#f4f4f4; font-weight:600; font-size:0.75rem; letter-spacing:0.5px; text-transform:uppercase; }
+.section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.25rem; }
+.kv-rows { max-height:140px; overflow:auto; }
+.kv-row { display:grid; grid-template-columns: 24px 1fr 1fr 32px; gap:0.25rem; align-items:center; margin-bottom:0.25rem; }
+.kv-input input { background:#1f1f1f; color:#f4f4f4; border-color:#525252; }
+.row-remove-btn { background:#262626; color:#f4f4f4; border:1px solid #393939; border-radius:4px; cursor:pointer; height:32px; display:flex; align-items:center; justify-content:center; }
+.row-remove-btn:hover { background:#393939; }
+.body-editor { margin-top:0.75rem; background:#1f1f1f; border:1px solid #262626; border-radius:4px; padding:0.5rem; }
+.body-header { display:flex; align-items:center; justify-content:space-between; font-size:0.75rem; color:#c6c6c6; margin-bottom:0.25rem; }
+.body-controls { display:flex; align-items:center; gap:0.5rem; }
+.body-mode-select { background:#1f1f1f; color:#f4f4f4; border:1px solid #525252; height:24px; font-size:0.65rem; border-radius:4px; padding:0 4px; }
+.body-mode-select:focus { outline:2px solid #0f62fe; }
+.body-toggle-btn { background:#262626; color:#f4f4f4; border:1px solid #393939; border-radius:4px; height:24px; padding:0 8px; font-size:0.65rem; cursor:pointer; }
+.body-toggle-btn:hover { background:#393939; }
+.body-hint { margin-top:4px; font-size:0.6rem; color:#8d8d8d; }
+.raw-body-textarea textarea, .raw-body-textarea { background:#1f1f1f; color:#ffffff; border-color:#525252; }
+.placeholder { font-size:0.75rem; color:#c6c6c6; padding:0.5rem 0; user-select: text; -webkit-user-select: text; }
+.placeholder.small { padding:0.25rem 0; }
+.response-viewer { flex:1; display:flex; flex-direction:column; user-select: text; -webkit-user-select: text; }
+.response-panels { display:grid; grid-template-columns: 280px 1fr; gap:0.75rem; }
+.response-headers { background:#1f1f1f; border:1px solid #262626; border-radius:4px; padding:0.5rem; overflow:auto; user-select: text; -webkit-user-select: text; }
+.response-body { background:#1f1f1f; border:1px solid #262626; border-radius:4px; padding:0.5rem; overflow:auto; user-select: text; -webkit-user-select: text; }
+.response-body-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.25rem; gap:0.5rem; }
+.response-body-meta { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.7rem; color:#c6c6c6; user-select: text; -webkit-user-select: text; }
+.status-chip { display:inline-flex; align-items:center; padding:0.15rem 0.5rem; border-radius:999px; font-weight:600; letter-spacing:0.4px; text-transform:uppercase; background:#393939; color:#f4f4f4; user-select: text; -webkit-user-select: text; }
+.status-chip.ok { background:#24a148; color:#061b08; }
+.status-chip.error { background:#da1e28; color:#ffffff; }
+.headers-list { list-style:none; padding:0; margin:0; font-size:0.7rem; user-select: text; -webkit-user-select: text; }
+.headers-list li { margin-bottom:0.25rem; word-break:break-all; }
+.code-wrapper pre, .code-wrapper { background:#262626 !important; user-select: text !important; -webkit-user-select: text !important; }
+.code-wrapper .cds--snippet,
+.code-wrapper .cds--snippet-container,
+.code-wrapper .cds--snippet--multi,
+.code-wrapper .cds--snippet code,
+.code-wrapper .cds--snippet pre { background:#262626 !important; color:#f4f4f4 !important; user-select: text !important; -webkit-user-select: text !important; }
+.code-wrapper .cds--snippet-container::before,
+.code-wrapper .cds--snippet-container::after { background:none !important; }
+.code-wrapper .cds--snippet-btn svg { fill:#f4f4f4; }
+
+/* Copy button: white icon, no background */
+.code-wrapper .cds--snippet .cds--btn,
+.code-wrapper .cds--snippet .cds--snippet__action,
+.code-wrapper .cds--snippet .cds--copy {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	color: #f4f4f4 !important;
+}
+
+.code-wrapper .cds--snippet .cds--btn__icon,
+.code-wrapper .cds--snippet .cds--snippet__action .cds--btn__icon,
+.code-wrapper .cds--snippet .cds--copy .cds--btn__icon,
+.code-wrapper .cds--snippet .cds--snippet-btn svg {
+	fill: #ffffff !important; /* make the icon white */
+}
+
+/* Hover/active: keep transparent, emphasize icon only */
+.code-wrapper .cds--snippet .cds--btn:hover,
+.code-wrapper .cds--snippet .cds--snippet__action:hover,
+.code-wrapper .cds--snippet .cds--copy:hover {
+	background: transparent !important;
+	filter: drop-shadow(0 0 1px rgba(255,255,255,0.2));
+}
+
+.code-wrapper .cds--snippet .cds--btn:focus,
+.code-wrapper .cds--snippet .cds--snippet__action:focus,
+.code-wrapper .cds--snippet .cds--copy:focus {
+	outline: 1px solid #8d8d8d !important;
+	outline-offset: 2px !important;
+}
+.meta-badges { margin-left:0.75rem; display:inline-flex; gap:0.25rem; }
+.inline-toggle { font-size:0.65rem; display:flex; align-items:center; gap:0.25rem; cursor:pointer; }
+.hostname-warning { margin-top: -0.5rem; margin-bottom: 0.75rem; }
+
+/* Text selection highlighting */
+.execution-console ::selection {
+	background: #0f62fe;
+	color: #ffffff;
+}
+
+.execution-console ::-moz-selection {
+	background: #0f62fe;
+	color: #ffffff;
+}
+
+.execution-console input::selection,
+.execution-console textarea::selection,
+.execution-console .cds--snippet::selection,
+.execution-console .cds--snippet code::selection,
+.execution-console .response-body::selection,
+.execution-console .response-headers::selection {
+	background: #0f62fe;
+	color: #ffffff;
+}
+
+.execution-console input::-moz-selection,
+.execution-console textarea::-moz-selection,
+.execution-console .cds--snippet::-moz-selection,
+.execution-console .cds--snippet code::-moz-selection,
+.execution-console .response-body::-moz-selection,
+.execution-console .response-headers::-moz-selection {
+	background: #0f62fe;
+	color: #ffffff;
+}
+
+@media (max-width: 1200px) { .response-panels { grid-template-columns: 1fr; } .request-top-row { grid-template-columns: 100px 1fr 100px; } .row-groups { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .execution-console { height: 94vh; } .request-top-row { grid-template-columns: 90px 1fr 90px; } }

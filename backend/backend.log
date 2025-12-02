@@ -1,0 +1,319 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.aichatbot:ai-chatbot-backend >------------------
+[INFO] Building AI Chatbot Backend 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ ai-chatbot-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ai-chatbot-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ ai-chatbot-backend ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 45 source files with javac [debug release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ai-chatbot-backend ---
+[INFO] skip non existing resourceDirectory /Users/shreyasgowda/Documents/chatbot pipeline/ai chatbot/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ ai-chatbot-backend ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ ai-chatbot-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ ai-chatbot-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2025-11-05 13:25:46 - Starting AiChatbotApplication using Java 21.0.8 with PID 75093 (/Users/shreyasgowda/Documents/chatbot pipeline/ai chatbot/backend/target/classes started by shreyasgowda in /Users/shreyasgowda/Documents/chatbot pipeline/ai chatbot/backend)
+2025-11-05 13:25:46 - No active profile set, falling back to 1 default profile: "default"
+2025-11-05 13:25:47 - Loaded 159 embeddings from data/embeddings/embeddings.jsonl
+2025-11-05 13:25:47 - cleanOnStartup enabled: purging existing embeddings before indexing
+2025-11-05 13:25:47 - Starting repository reprocessing for maximo-application-suite/knowledge-center
+2025-11-05 13:25:47 - Deleted existing embeddings for maximo-application-suite/knowledge-center
+2025-11-05 13:25:47 - Repository reprocessing completed for maximo-application-suite/knowledge-center
+2025-11-05 13:25:47 - Starting repository reprocessing for maximo-application-suite/mas-suite-install
+2025-11-05 13:25:47 - Deleted existing embeddings for maximo-application-suite/mas-suite-install
+2025-11-05 13:25:47 - Repository reprocessing completed for maximo-application-suite/mas-suite-install
+2025-11-05 13:25:47 - Starting repository reprocessing for maximo-application-suite/MaxRenewAutomate
+2025-11-05 13:25:47 - Deleted existing embeddings for maximo-application-suite/MaxRenewAutomate
+2025-11-05 13:25:47 - Repository reprocessing completed for maximo-application-suite/MaxRenewAutomate
+2025-11-05 13:25:47 - Starting repository reprocessing for maximo-application-suite/mas-manage-install
+2025-11-05 13:25:47 - Deleted existing embeddings for maximo-application-suite/mas-manage-install
+2025-11-05 13:25:47 - Repository reprocessing completed for maximo-application-suite/mas-manage-install
+2025-11-05 13:25:47 - Started AiChatbotApplication in 1.461 seconds (process running for 1.623)
+2025-11-05 13:25:47 - Starting scheduled repository re-indexing
+2025-11-05 13:25:47 - Starting repository indexing for 4 repositories (force: false)
+2025-11-05 13:26:14 - Found 140 files across all repositories
+2025-11-05 13:26:14 - Processing 124 text files
+2025-11-05 13:26:15 - Processing document: devops/Installation-Manager/01-IBM-IM-Installation.md
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/Installation-Manager/01-IBM-IM-Installation.md
+2025-11-05 13:26:15 - Processing document: devops/db2/01-Setup.md
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/db2/01-Setup.md
+2025-11-05 13:26:15 - Processing document: devops/ldaps/setup-apacheds-ldaps.sh
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/ldaps/setup-apacheds-ldaps.sh
+2025-11-05 13:26:15 - Processing document: devops/db2/03-Maximo-DB-Prerequisite-Configuration.md
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/db2/03-Maximo-DB-Prerequisite-Configuration.md
+2025-11-05 13:26:15 - Processing document: devops/ldaps/ApacheDS_LDAPS_MAS_Integration.md
+2025-11-05 13:26:15 - Processed 2 chunks for file: devops/ldaps/ApacheDS_LDAPS_MAS_Integration.md
+2025-11-05 13:26:15 - Processing document: devops/fyre/01-Fyre-API.md
+2025-11-05 13:26:15 - Processing document: devops/db2/activity-monitor.md
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/fyre/01-Fyre-API.md
+2025-11-05 13:26:15 - Processing document: devops/db2/04-Backup-Restore.md
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/db2/04-Backup-Restore.md
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/db2/activity-monitor.md
+2025-11-05 13:26:15 - Processing document: devops/db2/02-Create-DB.md
+2025-11-05 13:26:15 - Processed 1 chunks for file: devops/db2/02-Create-DB.md
+2025-11-05 13:26:16 - Processing document: devops/db2/artifacts/db2server.rsp
+2025-11-05 13:26:16 - Processed 18 chunks for file: devops/db2/artifacts/db2server.rsp
+2025-11-05 13:26:16 - Processing document: devops/liberty/04-Server-Start-Stop.md
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/liberty/04-Server-Start-Stop.md
+2025-11-05 13:26:16 - Processing document: devops/liberty/03-Maximo-Deployment.md
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/liberty/03-Maximo-Deployment.md
+2025-11-05 13:26:16 - Processing document: devops/liberty/01-Liberty-Setup.md
+2025-11-05 13:26:16 - Processing document: devops/maximo/manual-deployment/01-Maximo-Setup.md
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/liberty/01-Liberty-Setup.md
+2025-11-05 13:26:16 - Processed 2 chunks for file: devops/maximo/manual-deployment/01-Maximo-Setup.md
+2025-11-05 13:26:16 - Processing document: devops/maximo/manual-deployment/02-Maximo-Build_EAR.md
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/maximo/manual-deployment/02-Maximo-Build_EAR.md
+2025-11-05 13:26:16 - Processing document: devops/liberty/02-Liberty-Configuration.md
+2025-11-05 13:26:16 - Processing document: devops/maximo/manual-deployment/03-Maximo_Deployment.md
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/maximo/manual-deployment/03-Maximo_Deployment.md
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/liberty/02-Liberty-Configuration.md
+2025-11-05 13:26:16 - Processing document: devops/maximo/manual-deployment/Java-Setup.md
+2025-11-05 13:26:16 - Processing document: devops/liberty/artifacts/server.xml
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/maximo/manual-deployment/Java-Setup.md
+2025-11-05 13:26:16 - Processed 1 chunks for file: devops/liberty/artifacts/server.xml
+2025-11-05 13:26:16 - Processing document: devops/maximo/OperatorHub-Based-Installation.md
+2025-11-05 13:26:16 - Processed 4 chunks for file: devops/maximo/OperatorHub-Based-Installation.md
+2025-11-05 13:26:16 - Processed 20/124 files (0 failed)
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-manage-install/03-manage-install.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/maximo/mas-manage-install/03-manage-install.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/02-common-services-operators-installation.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/03-suite-license-service-installation.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/04-mas-operator-installation.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/maximo/mas-suite-install/04-mas-operator-installation.md
+2025-11-05 13:26:17 - Processed 2 chunks for file: devops/maximo/mas-suite-install/03-suite-license-service-installation.md
+2025-11-05 13:26:17 - Processed 2 chunks for file: devops/maximo/mas-suite-install/02-common-services-operators-installation.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/06-mas-mongocfg.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/manual-deployment/Maximo-Image-Build.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/maximo/manual-deployment/Maximo-Image-Build.md
+2025-11-05 13:26:17 - Processed 2 chunks for file: devops/maximo/mas-suite-install/06-mas-mongocfg.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/07-mas-jdbc.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/05-mas-slscfg.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/maximo/mas-suite-install/07-mas-jdbc.md
+2025-11-05 13:26:17 - Processed 3 chunks for file: devops/maximo/mas-suite-install/05-mas-slscfg.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/01-catalog-installation.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/maximo/mas-suite-install/01-catalog-installation.md
+2025-11-05 13:26:17 - Processing document: devops/maximo/mas-suite-install/08-mas-install.md
+2025-11-05 13:26:17 - Processed 4 chunks for file: devops/maximo/mas-suite-install/08-mas-install.md
+2025-11-05 13:26:17 - Processing document: devops/system/02-Linux-User-Creation.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/system/02-Linux-User-Creation.md
+2025-11-05 13:26:17 - Processing document: devops/system/04-Java-Path.md
+2025-11-05 13:26:17 - Processing document: devops/system/03-Java_Install.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/system/04-Java-Path.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/system/03-Java_Install.md
+2025-11-05 13:26:17 - Processing document: devops/mongo/Mongo-Admin-Operaations.md
+2025-11-05 13:26:17 - Processing document: devops/mongo/Mongo-Install.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/mongo/Mongo-Admin-Operaations.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/mongo/Mongo-Install.md
+2025-11-05 13:26:17 - Processing document: devops/mongo/Mongo-User-Creation.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/mongo/Mongo-User-Creation.md
+2025-11-05 13:26:17 - Processing document: devops/system/01-System-Date.md
+2025-11-05 13:26:17 - Processing document: devops/mongo/Mongo-Enable-TLS.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/system/01-System-Date.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/mongo/Mongo-Enable-TLS.md
+2025-11-05 13:26:17 - Processing document: devops/system/05-Docker.md
+2025-11-05 13:26:17 - Processed 1 chunks for file: devops/system/05-Docker.md
+2025-11-05 13:26:18 - Processing document: devops/openshift/OpenShift_Install.md
+2025-11-05 13:26:18 - Processed 4 chunks for file: devops/openshift/OpenShift_Install.md
+2025-11-05 13:26:18 - Processed 40/124 files (0 failed)
+2025-11-05 13:26:18 - Processing document: java/maven/01-Maven-Install.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: java/maven/01-Maven-Install.md
+2025-11-05 13:26:18 - Processing document: java/jms/Liberty-jms-configuration.md
+2025-11-05 13:26:18 - Processing document: java/maven/03-Maven-Project.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: java/jms/Liberty-jms-configuration.md
+2025-11-05 13:26:18 - Processed 2 chunks for file: java/maven/03-Maven-Project.md
+2025-11-05 13:26:18 - Processing document: devops/system/Disk-Operations.md
+2025-11-05 13:26:18 - Processing document: java/jms/JMS-Client.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: devops/system/Disk-Operations.md
+2025-11-05 13:26:18 - Processed 2 chunks for file: java/jms/JMS-Client.md
+2025-11-05 13:26:18 - Processing document: java/maven/02-Maven-Home.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: java/maven/02-Maven-Home.md
+2025-11-05 13:26:18 - Processing document: java/springboot/01-SpringBoot.md
+2025-11-05 13:26:18 - Processed 2 chunks for file: java/springboot/01-SpringBoot.md
+2025-11-05 13:26:18 - Processing document: devops/system/Create-TLS-Certificate.md
+2025-11-05 13:26:18 - Processing document: devops/system/HA_Proxy.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: devops/system/Create-TLS-Certificate.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: devops/system/HA_Proxy.md
+2025-11-05 13:26:18 - Processing document: java/thread-dump/thread-dump.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: java/thread-dump/thread-dump.md
+2025-11-05 13:26:18 - Processing document: maximo/restapi/00000_sets/00001_company_set.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/restapi/00000_sets/00001_company_set.md
+2025-11-05 13:26:18 - Processing document: maximo/restapi/00000_sets/00002_item_set.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/sets/restapi/Create-Company-Sets.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/sets/restapi/Create-Company-Sets.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/restapi/00000_sets/00002_item_set.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/administration/accounts/01-GL-Account.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/administration/accounts/01-GL-Account.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/administration/01-Object-Access.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/administration/01-Object-Access.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/organization/restapi/Create-Organization.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/organization/restapi/Create-Organization.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/sets/02-Create-Item-Set.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/sets/02-Create-Item-Set.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/sets/restapi/Create-Item-Sets.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/sets/restapi/Create-Item-Sets.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/organization/02-Create-Organization.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/organization/02-Create-Organization.md
+2025-11-05 13:26:18 - Processing document: maximo/manage/sets/01-Create-Company-Set.md
+2025-11-05 13:26:18 - Processed 1 chunks for file: maximo/manage/sets/01-Create-Company-Set.md
+2025-11-05 13:26:18 - Processed 60/124 files (0 failed)
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00200_coa/00200_glcomponents.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00400_location/00401_locations.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00200_coa/00200_glcomponents.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00400_location/00401_locations.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00200_coa/00201_coa.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00200_coa/00201_coa.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00500_asset/00501_asset.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00500_asset/00501_asset.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00800_company/00801_company_master.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00800_company/00801_company_master.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00900_pr/00902_pr_status.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00900_pr/00901_pr.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00900_pr/00902_pr_status.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00900_pr/00901_pr.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00300_item/00302_service_item.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00300_item/00301_item.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00300_item/00302_service_item.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/00300_item/00301_item.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/00100_organization_site/00101_organization_site.md
+2025-11-05 13:26:19 - Processed 2 chunks for file: maximo/restapi/00100_organization_site/00101_organization_site.md
+2025-11-05 13:26:19 - Processing document: 02-common-services/04-ibm-cert-manager-operandrequest.yaml
+2025-11-05 13:26:19 - Processed 1 chunks for file: 02-common-services/04-ibm-cert-manager-operandrequest.yaml
+2025-11-05 13:26:19 - Processing document: maximo/restapi/01000_po/01002_po_status.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/01000_po/01002_po_status.md
+2025-11-05 13:26:19 - Processing document: 02-common-services/01-create-ibm-common-services-project.sh
+2025-11-05 13:26:19 - Processed 1 chunks for file: 02-common-services/01-create-ibm-common-services-project.sh
+2025-11-05 13:26:19 - Processing document: maximo/restapi/01000_po/01001_po.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/01000_po/01001_po.md
+2025-11-05 13:26:19 - Processing document: 02-common-services/02-ibm-common-services-operatorgroup.yaml
+2025-11-05 13:26:19 - Processed 1 chunks for file: 02-common-services/02-ibm-common-services-operatorgroup.yaml
+2025-11-05 13:26:19 - Processing document: 03-sls/00-ibm-sls-install-init.sh
+2025-11-05 13:26:19 - Processed 1 chunks for file: 03-sls/00-ibm-sls-install-init.sh
+2025-11-05 13:26:19 - Processing document: 01-catalog-source/01-ibm-operator-catalogsource.yaml
+2025-11-05 13:26:19 - Processed 1 chunks for file: 01-catalog-source/01-ibm-operator-catalogsource.yaml
+2025-11-05 13:26:19 - Processing document: maximo/restapi/Commodities.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/Commodities.md
+2025-11-05 13:26:19 - Processing document: maximo/restapi/API-Doc.md
+2025-11-05 13:26:19 - Processed 1 chunks for file: maximo/restapi/API-Doc.md
+2025-11-05 13:26:19 - Processing document: 02-common-services/03-ibm-common-services-subscription.yaml
+2025-11-05 13:26:19 - Processed 1 chunks for file: 02-common-services/03-ibm-common-services-subscription.yaml
+2025-11-05 13:26:19 - Processed 80/124 files (0 failed)
+2025-11-05 13:26:20 - Processing document: 04-data-reporter/01-create-ibm-software-central-project.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 04-data-reporter/01-create-ibm-software-central-project.sh
+2025-11-05 13:26:20 - Processing document: 04-data-reporter/02-ibm-metric-entitlement-key.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 04-data-reporter/02-ibm-metric-entitlement-key.sh
+2025-11-05 13:26:20 - Processing document: 03-sls/02-ibm-sls-entitlement.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 03-sls/02-ibm-sls-entitlement.sh
+2025-11-05 13:26:20 - Processing document: 03-sls/05-ibm-sls-mongo-credentials.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 03-sls/05-ibm-sls-mongo-credentials.sh
+2025-11-05 13:26:20 - Processing document: 03-sls/03-ibm-sls-operatorgroup.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 03-sls/03-ibm-sls-operatorgroup.yaml
+2025-11-05 13:26:20 - Processing document: 03-sls/01-create-ibm-sls-project.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 03-sls/01-create-ibm-sls-project.sh
+2025-11-05 13:26:20 - Processing document: 03-sls/07-patch-sls-startupprobe.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 03-sls/07-patch-sls-startupprobe.sh
+2025-11-05 13:26:20 - Processing document: 04-data-reporter/03-ibm-metrics-operatorgroup.yaml
+2025-11-05 13:26:20 - Processing document: 03-sls/06-ibm-sls.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 04-data-reporter/03-ibm-metrics-operatorgroup.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 03-sls/06-ibm-sls.yaml
+2025-11-05 13:26:20 - Processing document: 03-sls/04-ibm-sls-subscription.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 03-sls/04-ibm-sls-subscription.yaml
+2025-11-05 13:26:20 - Processing document: 05-mas-init/04-ibm-mas-subscription.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 05-mas-init/04-ibm-mas-subscription.yaml
+2025-11-05 13:26:20 - Processing document: 04-data-reporter/06-ibm-data-reporter-subscription.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 04-data-reporter/06-ibm-data-reporter-subscription.yaml
+2025-11-05 13:26:20 - Processing document: 04-data-reporter/05-ibm-marketplaceconfig.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 04-data-reporter/05-ibm-marketplaceconfig.yaml
+2025-11-05 13:26:20 - Processing document: 05-mas-init/01-create-ibm-mas-project.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 05-mas-init/01-create-ibm-mas-project.sh
+2025-11-05 13:26:20 - Processing document: 05-mas-init/06-slsCfg.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 05-mas-init/06-slsCfg.yaml
+2025-11-05 13:26:20 - Processing document: 05-mas-init/02-ibm-mas-entitlement-key.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 05-mas-init/02-ibm-mas-entitlement-key.sh
+2025-11-05 13:26:20 - Processing document: 05-mas-init/05-mas-sls-registration-key.sh
+2025-11-05 13:26:20 - Processing document: 05-mas-init/03-ibm-mas-operatorgroup.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 05-mas-init/05-mas-sls-registration-key.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 05-mas-init/03-ibm-mas-operatorgroup.yaml
+2025-11-05 13:26:20 - Processing document: 05-mas-init/00-mas-install-init.sh
+2025-11-05 13:26:20 - Processed 1 chunks for file: 05-mas-init/00-mas-install-init.sh
+2025-11-05 13:26:20 - Processing document: 04-data-reporter/04-ibm-metrics-subscription.yaml
+2025-11-05 13:26:20 - Processed 1 chunks for file: 04-data-reporter/04-ibm-metrics-subscription.yaml
+2025-11-05 13:26:20 - Processed 100/124 files (0 failed)
+2025-11-05 13:26:21 - Processing document: keyfiles/sls.crt
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/api/AutomateService.java
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/MaxRenewAutomate.java
+2025-11-05 13:26:21 - Processed 1 chunks for file: keyfiles/sls.crt
+2025-11-05 13:26:21 - Processing document: 05-mas-init/11-MasInstall.yaml
+2025-11-05 13:26:21 - Processing document: 05-mas-init/10-JdbcCfg.yaml
+2025-11-05 13:26:21 - Processed 1 chunks for file: src/main/java/maxrenew/automate/api/AutomateService.java
+2025-11-05 13:26:21 - Processing document: 05-mas-init/07-ibm-mas-mongo-credentials.sh
+2025-11-05 13:26:21 - Processed 1 chunks for file: src/main/java/maxrenew/automate/MaxRenewAutomate.java
+2025-11-05 13:26:21 - Processed 1 chunks for file: 05-mas-init/11-MasInstall.yaml
+2025-11-05 13:26:21 - Processed 1 chunks for file: 05-mas-init/10-JdbcCfg.yaml
+2025-11-05 13:26:21 - Processed 1 chunks for file: 05-mas-init/07-ibm-mas-mongo-credentials.sh
+2025-11-05 13:26:21 - Processing document: 05-mas-init/08-MongoCfg.yaml
+2025-11-05 13:26:21 - Processed 1 chunks for file: 05-mas-init/08-MongoCfg.yaml
+2025-11-05 13:26:21 - Processing document: 05-mas-init/09-ibm-mas-jdbc-credentials.sh
+2025-11-05 13:26:21 - Processed 1 chunks for file: 05-mas-init/09-ibm-mas-jdbc-credentials.sh
+2025-11-05 13:26:21 - Processing document: keyfiles/mongo.crt
+2025-11-05 13:26:21 - Processing document: pom.xml
+2025-11-05 13:26:21 - Processed 1 chunks for file: keyfiles/mongo.crt
+2025-11-05 13:26:21 - Processed 1 chunks for file: pom.xml
+2025-11-05 13:26:21 - Processing document: 01-create-ibm-manage-project.sh
+2025-11-05 13:26:21 - Processed 1 chunks for file: 01-create-ibm-manage-project.sh
+2025-11-05 13:26:21 - Processing document: src/main/resources/application.properties
+2025-11-05 13:26:21 - Processed 0 chunks for file: src/main/resources/application.properties
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/service/MCCAutomateService.java
+2025-11-05 13:26:21 - Processed 1 chunks for file: src/main/java/maxrenew/automate/service/MCCAutomateService.java
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/utility/UtilityFileProcess.java
+2025-11-05 13:26:21 - Processed 2 chunks for file: src/main/java/maxrenew/automate/utility/UtilityFileProcess.java
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/mcc/pojo/MCCTargetObjStructure.java
+2025-11-05 13:26:21 - Processed 1 chunks for file: src/main/java/maxrenew/automate/mcc/pojo/MCCTargetObjStructure.java
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/mcc/pojo/MCCDeviceModulePlanDetails.java
+2025-11-05 13:26:21 - Processed 1 chunks for file: src/main/java/maxrenew/automate/mcc/pojo/MCCDeviceModulePlanDetails.java
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/mcc/parser/MCCObjParser.java
+2025-11-05 13:26:21 - Processed 2 chunks for file: src/main/java/maxrenew/automate/mcc/parser/MCCObjParser.java
+2025-11-05 13:26:21 - Processing document: 02-ibm-mas-entitlement-key.sh
+2025-11-05 13:26:21 - Processed 1 chunks for file: 02-ibm-mas-entitlement-key.sh
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/mcc/pojo/MCCSourceObjStructure.java
+2025-11-05 13:26:21 - Processed 1 chunks for file: src/main/java/maxrenew/automate/mcc/pojo/MCCSourceObjStructure.java
+2025-11-05 13:26:21 - Processing document: src/main/java/maxrenew/automate/utility/JSONOperation.java
+2025-11-05 13:26:21 - Processed 2 chunks for file: src/main/java/maxrenew/automate/utility/JSONOperation.java
+2025-11-05 13:26:21 - Processed 120/124 files (0 failed)
+2025-11-05 13:26:22 - Processing document: 04-ibm-manage-subscription.yaml
+2025-11-05 13:26:22 - Processed 1 chunks for file: 04-ibm-manage-subscription.yaml
+2025-11-05 13:26:22 - Processing document: 05-ibm-manageapp.yaml
+2025-11-05 13:26:22 - Processed 1 chunks for file: 05-ibm-manageapp.yaml
+2025-11-05 13:26:22 - Processing document: 06-ibm-manageworkspace.yaml
+2025-11-05 13:26:22 - Processed 1 chunks for file: 06-ibm-manageworkspace.yaml
+2025-11-05 13:26:22 - Processing document: 03-ibm-manage-operatorgroup.yaml
+2025-11-05 13:26:22 - Processed 1 chunks for file: 03-ibm-manage-operatorgroup.yaml
+2025-11-05 13:26:22 - Processed 124/124 files (0 failed)
+2025-11-05 13:26:22 - Repository indexing completed in 34485ms. Processed: 124, Failed: 0
+2025-11-05 13:38:40 - Received chat message from session: web-session-1762330120065
+2025-11-05 13:38:40 - Processing message for session: web-session-1762330120065
+2025-11-05 13:38:40 - Finding best matching file for: Give DB2 setup
+2025-11-05 13:38:40 - Best matching file: devops/db2/01-Setup.md 
+2025-11-05 13:38:58 - Successfully processed message in 18185ms

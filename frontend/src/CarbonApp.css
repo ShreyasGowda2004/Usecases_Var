@@ -1,0 +1,168 @@
+/* IBM Carbon Design System - Maximo Application Suite Theme */
+
+.carbon-app {
+  min-height: 100vh;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Status notification in header */
+.status-notification {
+  margin-right: 1rem;
+}
+
+.status-notification .cds--toast-notification {
+  margin: 0;
+  min-height: 32px;
+  padding: 0.25rem 0.5rem;
+}
+
+.status-notification .cds--toast-notification__title {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+/* Theme selector dots */
+.theme-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.theme-white {
+  background-color: #ffffff;
+  border-color: #8d8d8d;
+}
+
+.theme-g10 {
+  background-color: #f4f4f4;
+  border-color: #8d8d8d;
+}
+
+.theme-g90 {
+  background-color: #262626;
+  border-color: #8d8d8d;
+}
+
+.theme-g100 {
+  background-color: #161616;
+  border-color: #8d8d8d;
+}
+
+/* Content grid */
+.content-grid {
+  padding: 2rem 0;
+  min-height: calc(100vh - 48px);
+}
+
+/* Header customizations for Maximo */
+.cds--header__name {
+  font-weight: 600;
+  color: var(--cds-text-primary);
+}
+
+.cds--header__menu-item {
+  position: relative;
+}
+
+.cds--header__menu-item:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.cds--header__menu-item[aria-current="page"] {
+  background-color: var(--cds-layer-selected);
+}
+
+.cds--header__menu-item[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--cds-border-interactive);
+}
+
+/* Side navigation */
+.cds--side-nav__menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.cds--side-nav__menu-item svg {
+  margin-right: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 672px) {
+  .content-grid {
+    padding: 1rem 0;
+  }
+  
+  .status-notification {
+    display: none;
+  }
+}
+
+/* Dark theme adjustments */
+[data-carbon-theme="g90"],
+[data-carbon-theme="g100"] {
+  .theme-white {
+    border-color: #6f6f6f;
+  }
+  
+  .theme-g10 {
+    border-color: #6f6f6f;
+  }
+}
+
+/* High contrast focus indicators */
+.cds--header__menu-item:focus,
+.cds--side-nav__menu-item:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, 
+    var(--cds-skeleton-background) 25%, 
+    var(--cds-skeleton-element) 50%, 
+    var(--cds-skeleton-background) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Print styles */
+@media print {
+  .cds--header,
+  .cds--side-nav {
+    display: none;
+  }
+  
+  .content-grid {
+    padding: 0;
+  }
+}

@@ -1,0 +1,72 @@
+/* Carbon App Styles */
+.carbon-app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.carbon-content {
+  flex: 1;
+  background: var(--cds-background);
+  padding: 0;
+  min-height: calc(100vh - 48px);
+}
+
+/* Header customizations */
+.cds--header__name {
+  font-weight: 600;
+}
+
+/* Side navigation styles */
+.cds--side-nav__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Theme toggle button */
+.cds--header__action {
+  transition: background-color 0.15s ease;
+}
+
+.cds--header__action:hover {
+  background-color: var(--cds-background-hover);
+}
+
+/* Fix for side nav inert attribute warning */
+.cds--side-nav nav {
+  /* Ensure nav doesn't have inert attribute issues */
+  pointer-events: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 672px) {
+  .carbon-content {
+    min-height: calc(100vh - 48px);
+  }
+}
+
+@media (min-width: 1056px) {
+  .carbon-content {
+    min-height: calc(100vh - 48px);
+  }
+}
+
+/* Global theme overrides */
+:root {
+  --header-height: 48px;
+}
+
+.carbon-app .cds--content {
+  margin-left: 0;
+}
+
+/* Content area adjustments */
+.carbon-content > * {
+  height: 100%;
+}
+
+/* Fix for side nav overlay */
+.cds--side-nav__overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
