@@ -20,7 +20,7 @@ The AI Chatbot Backend is a Spring Boot application that provides intelligent as
 - **Ollama (Granite 4:micro-h)** - AI model for response generation ONLY (no embeddings)
 - **MongoDB** - Chat history and execution logs
 - **File-based Text Chunk Store** - Document text chunks (NOT vector embeddings)
-- **Keyword-Based Semantic Search** - Heuristic scoring with synonym expansion
+- **Keyword-Based Semantic Search** - Heuristic scoring with synonym expansion (Heuristic scoring with synonym expansion describes a method, often used in information retrieval or natural language processing, that scores search results or documents using practical, experience-based rules (heuristics) enhanced by considering synonyms of the query terms.)
 - **GitHub API** - Knowledge base repository access
 
 ---
